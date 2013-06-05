@@ -62,6 +62,7 @@ module PayPal
       #
       def checkout
         params = collect(
+          :debug,
           :locale,
           :billing_type,
           :amount,
@@ -73,7 +74,8 @@ module PayPal
           :item_category,
           :item_name,
           :item_amount,
-          :item_quantity
+          :item_quantity,
+          :popup
         ).merge(
           :payment_action => "Authorization",
           :no_shipping => 1
