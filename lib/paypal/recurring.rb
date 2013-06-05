@@ -16,11 +16,13 @@ module PayPal
     ENDPOINTS = {
        :sandbox => {
          :api  => "https://api-3t.sandbox.paypal.com/nvp",
-         :site => "https://www.sandbox.paypal.com/cgi-bin/webscr"
+         :site => "https://www.sandbox.paypal.com/cgi-bin/webscr",
+         :popup => 'https://www.sandbox.paypal.com/incontext'
        },
        :production => {
          :api  => "https://api-3t.paypal.com/nvp",
-         :site => "https://www.paypal.com/cgi-bin/webscr"
+         :site => "https://www.paypal.com/cgi-bin/webscr",
+         :popup => 'https://www.paypal.com/incontext'
        }
     }
 
