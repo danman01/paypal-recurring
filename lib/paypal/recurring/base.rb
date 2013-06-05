@@ -6,6 +6,7 @@ module PayPal
       attr_accessor :cancel_url
       attr_accessor :currency
       attr_accessor :description
+      attr_accessor :debug
       attr_accessor :note
       attr_accessor :email
       attr_accessor :failed
@@ -17,6 +18,7 @@ module PayPal
       attr_accessor :outstanding
       attr_accessor :payer_id
       attr_accessor :period
+      attr_accessor :popup
       attr_accessor :profile_id
       attr_accessor :reference
       attr_accessor :refund_type
