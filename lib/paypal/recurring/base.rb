@@ -24,6 +24,7 @@ module PayPal
       attr_accessor :start_at
       attr_accessor :token
       attr_accessor :transaction_id
+      attr_accessor :ipn_url
       attr_accessor :item_category
       attr_accessor :item_name
       attr_accessor :item_amount
@@ -60,6 +61,7 @@ module PayPal
       def checkout
         params = collect(
           :locale,
+          :billing_type,
           :amount,
           :return_url,
           :cancel_url,
