@@ -96,6 +96,10 @@ module PayPal
     def self.api_endpoint
       endpoints[:api]
     end
+    
+    def self.popup_endpoint
+      endpoints[:popup]
+    end
 
     # Return PayPal's API version.
     #
