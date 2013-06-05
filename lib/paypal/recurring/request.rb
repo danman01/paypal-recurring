@@ -110,6 +110,10 @@ module PayPal
       #
       def run(method, params = {})
         params = prepare_params(params.merge(:method => METHODS.fetch(method, method.to_s)))
+        if params[:debug] && params[:debug] == "true"
+          puts "PARAMS:"
+          puts params
+        end
         response = post(params)
         Response.process(method, response)
       end
@@ -121,11 +125,20 @@ module PayPal
           http["User-Agent"] = "PayPal::Recurring/#{PayPal::Recurring::Version::STRING}"
         end
       end
-
+      
+      def popup_request
+        @request ||= Net::HTTP::Post.new(popup_uri.request_uri).tap do |http|
+          http["User-Agent"] = "PayPal::Recurring/#{PayPal::Recurring::Version::STRING}"
+        end
+      end
       #
       #
       def post(params = {})
-        request.form_data = params
+        if params[:popup] && params[:popup] == "true"
+          popup_request.form_data = params
+        else
+          request.form_data = params
+        end
         client.request(request)
       end
 
@@ -139,6 +152,10 @@ module PayPal
       #
       def uri # :nodoc:
         @uri ||= URI.parse(PayPal::Recurring.api_endpoint)
+      end
+      
+      def popup_uri
+        @uri ||= URI.parse(PayPal::Recurring.popup_endpoint)
       end
 
       def client
