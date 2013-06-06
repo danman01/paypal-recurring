@@ -109,12 +109,18 @@ module PayPal
       # PayPal::Recurring::Request::ATTRIBUTES constant.
       #
       def run(method, params = {})
-        params = prepare_params(params.merge(:method => METHODS.fetch(method, method.to_s)))
         if params[:debug] && params[:debug] == "true"
           puts "PARAMS:"
           puts params
+          params.delete(:debug)
         end
-        response = post(params)
+        if params[:popup]
+          popup=true
+          params.delete(:popup)
+        end
+        params = prepare_params(params.merge(:method => METHODS.fetch(method, method.to_s)))
+        
+        response = post(params,popup)
         Response.process(method, response)
       end
 
@@ -133,8 +139,8 @@ module PayPal
       end
       #
       #
-      def post(params = {})
-        if params[:popup] && params[:popup] == "true"
+      def post(params = {},popup=false)
+        if popup
           popup_request.form_data = params
         else
           request.form_data = params
