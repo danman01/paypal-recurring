@@ -11,6 +11,9 @@ module PayPal
       attr_accessor :email
       attr_accessor :failed
       attr_accessor :frequency
+      attr_accessor :header_image
+      attr_accessor :header_border_color
+      attr_accessor :page_style
       attr_accessor :initial_amount
       attr_accessor :initial_amount_action
       attr_accessor :ipn_url
@@ -70,12 +73,14 @@ module PayPal
           :cancel_url,
           :currency,
           :description,
+          :header_image,
+          :header_border_color,
           :ipn_url,
           :item_category,
           :item_name,
           :item_amount,
           :item_quantity,
-          :popup
+          :page_style
         ).merge(
           :payment_action => "Authorization",
           :no_shipping => 1
